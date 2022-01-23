@@ -10,6 +10,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
+#GET
 def test_get_users():
 	url = f"{root_url}/users"
 	response = requests.get(url)
@@ -21,6 +22,7 @@ def test_get_users():
 		print(f"Тест test_get_users FAILED. Expected data type: {expected_body_type}. Actual data type: {body_type}")
 	return response.json()[-1].get("id")
 
+#POST
 def test_create_user():
 	url = f"{root_url}/users"
 	rand_name = ''.join(random.choices(string.ascii_letters, k=3))
@@ -41,6 +43,7 @@ def test_create_user():
 	else:
 		print(f"Тест test_create_user №2  FAILED. Status code: {response.status_code}. Error: {response.json()}")
 
+#GET
 def test_get_posts():
 	url = f"{root_url}/posts"
 	response = requests.get(url)
@@ -53,7 +56,7 @@ def test_get_posts():
 		print(f"Тест test_get_posts №1  FAILED, {response.status_code}. Error: {response.json()}")
 	return response.json()[-1]
 
-
+#POST
 def test_create_posts():
 	url = f"{root_url}/posts"
 	rand_title = ''.join(random.choices(string.ascii_letters, k=3))
@@ -78,5 +81,3 @@ def test_create_posts():
 		print("Тест  test_create_posts №3  PASSED, тип значения last_author_id == int")
 	else:
 		print(f"Тест  test_create_posts №3  FAILED, тип значения last_author_id == {type(last_author_id)}, ожидалось int")
-
-
