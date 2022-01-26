@@ -1,0 +1,15 @@
+pipenv shell
+pipenv install
+python api/run.py
+
+
+pytest
+pytest -v
+pytest test_users.py
+pytest test_users.py -v
+pytest -k us -v
+pytest -m my_unregistered_mark
+pytest -v -m my_unregistered_mark
+pytest -v -m custom_marker
+pytest --markers
+"""

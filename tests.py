@@ -3,12 +3,7 @@ import json
 
 import random
 import string
-
-root_url = "http://localhost:5000"
-headers = {
-    "accept": "application/json",
-    "Content-Type": "application/json"
-}
+from settings import root_url,headers
 
 #GET
 def test_get_users():
