@@ -8,16 +8,13 @@ from settings import root_url, headers
 
 
 url = f"{root_url}/users"
-users = []
 
-def test_get_users():
+def get_users():
+    users = []
     response = requests.get(url)
-    body_type = type(response.json())
-    expected_body_type = list
-
-    assert body_type == expected_body_type
     for i in response.json():
         users.append(i.get("username"))
+    return users
 
 
 def test_create_user():
@@ -40,13 +37,13 @@ def test_create_user():
 def test_update_user():
     rand_name = ''.join(random.choices(string.ascii_letters, k=3))
     rand_pass = ''.join(random.choices(string.ascii_letters, k=3))
-    data = {"username": "Test_" + rand_name, "email": "test@test.com", "password": "Test_" + rand_pass}
+    data = {"username": "Test_"+rand_name, "email": "test@test.com", "password": "Test_"+rand_pass}
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 201:
         rand_name_new = ''.join(random.choices(string.ascii_letters, k=4))
         new_user_id = response.json().get("id")
-        test_get_users()
+        users = get_users()
         new_name = "test_update_user01"
         if new_name in users:
             new_name = new_name+rand_name_new
@@ -62,5 +59,7 @@ def test_update_user():
             upd_user_payload = {"username": new_name}
             response = requests.put(f"{url}/{new_user_id}", headers=headers, data=json.dumps(upd_user_payload))
             assert response.status_code == 201
+
+
 
 
