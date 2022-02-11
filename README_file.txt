@@ -1,6 +1,12 @@
 pipenv shell
+
+pipenv sync
 pipenv install
+
 python api/run.py
+
+pytest --alluredir=./my_allure_results
+allure serve ./my_allure_results
 
 
 pytest

@@ -59,7 +59,3 @@ def test_update_user():
             upd_user_payload = {"username": new_name}
             response = requests.put(f"{url}/{new_user_id}", headers=headers, data=json.dumps(upd_user_payload))
             assert response.status_code == 201
-
-
-
-
